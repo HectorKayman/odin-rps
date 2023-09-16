@@ -1,6 +1,6 @@
+const choices = ["rock", "paper", "scissors"];
 // Function to get computer's choice
 const getComputerChoice = function () {
-  const choices = ["rock", "paper", "scissors"];
   // Generate a random index within the length of the array
   const randomIndex = Math.floor(Math.random() * choices.length);
 
@@ -18,30 +18,35 @@ const capitalizeChoice = function (str) {
 
 // Function to play one round of RPS
 const playRound = function (playerSelection, computerSelection) {
-  playerChoice = playerSelection.toLowerCase();
-
-  if (playerChoice === computerSelection) return "Its a Draw.";
+  if (playerSelection === computerSelection) return "Its a Draw.";
   if (
-    (playerChoice === "rock" && computerSelection === "paper") ||
-    (playerChoice === "paper" && computerSelection === "scissors") ||
-    (playerChoice === "scissors" && computerSelection === "rock")
+    (playerSelection === "rock" && computerSelection === "paper") ||
+    (playerSelection === "paper" && computerSelection === "scissors") ||
+    (playerSelection === "scissors" && computerSelection === "rock")
   )
     return `You Lose! ${capitalizeChoice(
       computerSelection
-    )} beats ${capitalizeChoice(playerChoice)}`;
+    )} beats ${capitalizeChoice(playerSelection)}`;
   else
-    return `You Win! ${capitalizeChoice(playerChoice)} beats ${capitalizeChoice(
-      computerSelection
-    )}`;
+    return `You Win! ${capitalizeChoice(
+      playerSelection
+    )} beats ${capitalizeChoice(computerSelection)}`;
+};
+
+// Helper (Recursive) function to get correct user input
+const promptUser = function () {
+  const userInput = prompt(
+    "What Do You Choose? Rock, Paper or Scissors."
+  ).toLowerCase();
+  if (!choices.includes(userInput)) return promptUser();
+  else return userInput;
 };
 
 // Function to play 5 rounds of RPS
 const game = function () {
   let finalScore = 0;
   for (let i = 0; i < 5; i++) {
-    const userSelection = prompt(
-      "What Do You Choose? Rock, Paper or Scissors."
-    );
+    const userSelection = promptUser();
     const winningPlayer = playRound(userSelection, getComputerChoice());
     const roundWinner = winningPlayer.substring(0, 7);
     console.log(winningPlayer);
