@@ -9,6 +9,13 @@ const getComputerChoice = function () {
   return computerChoice;
 };
 
+// Helper function to capitalize the first letter
+const capitalizeChoice = function (str) {
+  return str.length === 0
+    ? str
+    : `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
+};
+
 // Function to play one round of RPS
 const playRound = function (playerSelection, computerSelection) {
   playerChoice = playerSelection.toLowerCase();
@@ -19,17 +26,13 @@ const playRound = function (playerSelection, computerSelection) {
     (playerChoice === "paper" && computerSelection === "scissors") ||
     (playerChoice === "scissors" && computerSelection === "rock")
   )
-    return `You Lose! ${computerSelection
-      .charAt(0)
-      .toUpperCase()}${computerSelection.slice(1)} beats ${playerChoice
-      .charAt(0)
-      .toUpperCase()}${playerChoice.slice(1)}`;
+    return `You Lose! ${capitalizeChoice(
+      computerSelection
+    )} beats ${capitalizeChoice(playerChoice)}`;
   else
-    return `You Win! ${playerChoice
-      .charAt(0)
-      .toUpperCase()}${playerChoice.slice(1)} beats ${computerSelection
-      .charAt(0)
-      .toUpperCase()}${computerSelection.slice(1)}`;
+    return `You Win! ${capitalizeChoice(playerChoice)} beats ${capitalizeChoice(
+      computerSelection
+    )}`;
 };
 
 // Function to play 5 rounds of RPS
