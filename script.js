@@ -24,11 +24,7 @@ const playRound = function (playerSelection, computerSelection) {
       .toUpperCase()}${computerSelection.slice(1)} beats ${playerChoice
       .charAt(0)
       .toUpperCase()}${playerChoice.slice(1)}`;
-  if (
-    (playerChoice === "paper" && computerSelection === "rock") ||
-    (playerChoice === "scissors" && computerSelection === "paper") ||
-    (playerChoice === "rock" && computerSelection === "scissors")
-  )
+  else
     return `You Win! ${playerChoice
       .charAt(0)
       .toUpperCase()}${playerChoice.slice(1)} beats ${computerSelection
